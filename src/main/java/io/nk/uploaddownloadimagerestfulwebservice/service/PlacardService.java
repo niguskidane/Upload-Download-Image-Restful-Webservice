@@ -1,7 +1,9 @@
 package io.nk.uploaddownloadimagerestfulwebservice.service;
 
+import io.nk.uploaddownloadimagerestfulwebservice.model.DBFile;
 import io.nk.uploaddownloadimagerestfulwebservice.model.PlacardImage;
 import io.nk.uploaddownloadimagerestfulwebservice.model.PlacardImageRequest;
+import io.nk.uploaddownloadimagerestfulwebservice.repository.DBFilePlacardImageRepository;
 import io.nk.uploaddownloadimagerestfulwebservice.repository.PlacardImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,10 @@ public class PlacardService {
     @Autowired
     private PlacardImageRepository placardImageRepository;
 
+    @Autowired
+    private DBFilePlacardImageRepository dbFilePlacardImageRepository;
+
+
     public void savePlacard(PlacardImageRequest request){
         placardImageRepository.save(request);
     }
@@ -24,5 +30,11 @@ public class PlacardService {
         return placardImage;
     }
 
+
+    public DBFile getPlacardImageForDbFile(String placardName){
+        System.out.println("Getting Placard Image for DBFile Object : "+ placardName);
+        DBFile placardImage=dbFilePlacardImageRepository.getPlacardImage(placardName);
+        return placardImage;
+    }
 
 }
